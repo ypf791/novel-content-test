@@ -1,0 +1,32 @@
+[build]
+  command = "npm --prefix site install --no-audit --no-fund && node site/scripts/build.mjs --content-dir published --output-dir dist"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  directory = "site/netlify/functions"
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/reader/*"
+  to = "/reader/:splat"
+  status = 200
+  conditions = { Role = ["reader"] }
+
+[[redirects]]
+  from = "/reader/*"
+  to = "/"
+  status = 302
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "no-referrer"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+    Cache-Control = "private, no-store"
+
