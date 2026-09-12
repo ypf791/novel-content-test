@@ -9,4 +9,4 @@ Private publication-content repository for the novel-reader proof of concept.
 
 The POC must never read directly from Novel Wiki. Content arrives here only as
 an explicitly selected publication copy.
-
+Branch deployment test initialized.
